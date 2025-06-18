@@ -1,25 +1,114 @@
 import { motion } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const SkillSphere = ({ position, skill, color }: any) => {
-  const meshRef = useRef<THREE.Group>(null!);
-
+  const groupRef = useRef<THREE.Group>(null!);
+  const textRef = useRef<THREE.Mesh>(null!);
+  const [hovered, setHovered] = useState(false);
+  
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
+    }
+    
+    if (textRef.current) {
+      // Keep text facing the camera
+      textRef.current.rotation.y = -groupRef.current.rotation.y;
+      textRef.current.rotation.x = 0;
+      textRef.current.rotation.z = 0;
     }
   });
 
   return (
-    <group ref={meshRef} position={position}>
+    <group 
+      ref={groupRef} 
+      position={position}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
       <mesh>
         <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial color={color} transparent opacity={0.7} />
+        <meshStandardMaterial 
+          color={color} 
+          transparent 
+          opacity={0.7} 
+          emissive={color}
+          emissiveIntensity={hovered ? 0.5 : 0.2}
+        />
+      </mesh>
+      <mesh ref={textRef} position={[0, -1.2, 0]}>
+        <textGeometry 
+          args={[
+            skill, 
+            {
+              font: new THREE.Font(),
+              size: 0.2,
+              height: 0.05,
+            }
+          ]} 
+        />
+        <meshBasicMaterial color="#ffffff" />
       </mesh>
     </group>
+  );
+};
+
+// Custom text rendering without using drei
+const SkillLabel = ({ position, text, color }: { position: [number, number, number], text: string, color: string }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const textureRef = useRef<THREE.Texture | null>(null);
+  const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
+  const meshRef = useRef<THREE.Mesh>(null!);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas dimensions
+    canvas.width = 256;
+    canvas.height = 64;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw text
+    ctx.fillStyle = color;
+    ctx.font = 'bold 32px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    
+    // Create texture
+    if (textureRef.current) {
+      textureRef.current.needsUpdate = true;
+    } else {
+      textureRef.current = new THREE.CanvasTexture(canvas);
+      materialRef.current = new THREE.MeshBasicMaterial({
+        map: textureRef.current,
+        transparent: true,
+        side: THREE.DoubleSide,
+      });
+      
+      if (meshRef.current && materialRef.current) {
+        meshRef.current.material = materialRef.current;
+      }
+    }
+  }, [text, color]);
+  
+  return (
+    <>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <mesh ref={meshRef} position={position}>
+        <planeGeometry args={[1, 0.25]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
+      </mesh>
+    </>
   );
 };
 
@@ -72,17 +161,23 @@ const Skills3D = () => {
       }}
     >
       <WebGLContextHandler />
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.6} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />
       <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
       
       {skills.map((skill, index) => (
-        <SkillSphere
-          key={index}
-          position={skill.position}
-          skill={skill.name}
-          color={skill.color}
-        />
+        <group key={index}>
+          <SkillSphere
+            position={skill.position}
+            skill={skill.name}
+            color={skill.color}
+          />
+          <SkillLabel 
+            position={[skill.position[0], skill.position[1] - 1.2, skill.position[2]]} 
+            text={skill.name}
+            color={skill.color}
+          />
+        </group>
       ))}
     </Canvas>
   );
