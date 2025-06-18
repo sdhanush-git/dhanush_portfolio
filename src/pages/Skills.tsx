@@ -5,20 +5,12 @@ import * as THREE from "three";
 
 const SkillSphere = ({ position, skill, color }: any) => {
   const groupRef = useRef<THREE.Group>(null!);
-  const textRef = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
   
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
       groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
-    }
-    
-    if (textRef.current) {
-      // Keep text facing the camera
-      textRef.current.rotation.y = -groupRef.current.rotation.y;
-      textRef.current.rotation.x = 0;
-      textRef.current.rotation.z = 0;
     }
   });
 
@@ -38,19 +30,6 @@ const SkillSphere = ({ position, skill, color }: any) => {
           emissive={color}
           emissiveIntensity={hovered ? 0.5 : 0.2}
         />
-      </mesh>
-      <mesh ref={textRef} position={[0, -1.2, 0]}>
-        <textGeometry 
-          args={[
-            skill, 
-            {
-              font: new THREE.Font(),
-              size: 0.2,
-              height: 0.05,
-            }
-          ]} 
-        />
-        <meshBasicMaterial color="#ffffff" />
       </mesh>
     </group>
   );
