@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, Box, Torus } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 const FloatingObject = ({ position, color, type = "sphere" }: any) => {
@@ -17,9 +17,9 @@ const FloatingObject = ({ position, color, type = "sphere" }: any) => {
 
   return (
     <mesh ref={meshRef} position={position}>
-      {type === "sphere" && <Sphere args={[0.5, 32, 32]} />}
-      {type === "box" && <Box args={[0.8, 0.8, 0.8]} />}
-      {type === "torus" && <Torus args={[0.6, 0.2, 16, 100]} />}
+      {type === "sphere" && <sphereGeometry args={[0.5, 32, 32]} />}
+      {type === "box" && <boxGeometry args={[0.8, 0.8, 0.8]} />}
+      {type === "torus" && <torusGeometry args={[0.6, 0.2, 16, 100]} />}
       <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.2} />
     </mesh>
   );
