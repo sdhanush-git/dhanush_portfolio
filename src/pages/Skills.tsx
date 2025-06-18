@@ -1,0 +1,185 @@
+
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Text, Sphere } from "@react-three/drei";
+import * as THREE from "three";
+
+const SkillSphere = ({ position, skill, color }: any) => {
+  const meshRef = useRef<THREE.Group>(null!);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
+    }
+  });
+
+  return (
+    <group ref={meshRef} position={position}>
+      <Sphere args={[0.8, 32, 32]}>
+        <meshStandardMaterial color={color} transparent opacity={0.7} />
+      </Sphere>
+      <Text
+        position={[0, 0, 0.9]}
+        fontSize={0.2}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+      >
+        {skill}
+      </Text>
+    </group>
+  );
+};
+
+const Skills3D = () => {
+  const skills = [
+    { name: "React", position: [-2, 0, 0], color: "#61DAFB" },
+    { name: "TypeScript", position: [2, 1, -1], color: "#3178C6" },
+    { name: "Node.js", position: [0, -1, 1], color: "#339933" },
+    { name: "Three.js", position: [-1, 1.5, 0.5], color: "#000000" },
+    { name: "Python", position: [1.5, -0.5, -0.5], color: "#3776AB" },
+  ];
+
+  return (
+    <Canvas camera={{ position: [0, 0, 6], fov: 75 }}>
+      <ambientLight intensity={0.4} />
+      <pointLight position={[10, 10, 10]} intensity={0.8} />
+      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
+      
+      {skills.map((skill, index) => (
+        <SkillSphere
+          key={index}
+          position={skill.position}
+          skill={skill.name}
+          color={skill.color}
+        />
+      ))}
+    </Canvas>
+  );
+};
+
+const Skills = () => {
+  const skillCategories = [
+    {
+      title: "Frontend",
+      skills: [
+        { name: "React", level: 95 },
+        { name: "TypeScript", level: 90 },
+        { name: "Next.js", level: 85 },
+        { name: "Tailwind CSS", level: 92 },
+        { name: "Framer Motion", level: 88 },
+        { name: "Three.js", level: 80 }
+      ]
+    },
+    {
+      title: "Backend",
+      skills: [
+        { name: "Node.js", level: 88 },
+        { name: "Python", level: 85 },
+        { name: "Express.js", level: 90 },
+        { name: "MongoDB", level: 82 },
+        { name: "PostgreSQL", level: 78 },
+        { name: "GraphQL", level: 75 }
+      ]
+    },
+    {
+      title: "Tools & Others",
+      skills: [
+        { name: "Git", level: 92 },
+        { name: "Docker", level: 80 },
+        { name: "AWS", level: 75 },
+        { name: "Figma", level: 85 },
+        { name: "Jest", level: 82 },
+        { name: "CI/CD", level: 78 }
+      ]
+    }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, rotateY: 90 }}
+      animate={{ opacity: 1, rotateY: 0 }}
+      exit={{ opacity: 0, rotateY: -90 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen pt-24 pb-16 relative z-10"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent">
+              Skills & Expertise
+            </span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Technologies and tools I use to bring ideas to life
+          </p>
+        </motion.div>
+
+        {/* 3D Skills Visualization */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="h-96 mb-16 relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-red-600/20 rounded-3xl blur-xl" />
+          <div className="relative h-full rounded-3xl overflow-hidden">
+            <Skills3D />
+          </div>
+        </motion.div>
+
+        {/* Skill Categories */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 + categoryIndex * 0.2 }}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-center text-white">
+                {category.title}
+              </h3>
+              
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.8 + categoryIndex * 0.2 + skillIndex * 0.1 }}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-300 font-medium">{skill.name}</span>
+                      <span className="text-yellow-400 text-sm">{skill.level}%</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1, delay: 1 + categoryIndex * 0.2 + skillIndex * 0.1 }}
+                        className="bg-gradient-to-r from-yellow-400 to-red-400 h-full rounded-full relative"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-red-400 animate-pulse opacity-75" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Skills;

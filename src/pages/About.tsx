@@ -1,0 +1,176 @@
+
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Sphere } from "@react-three/drei";
+import * as THREE from "three";
+
+const ProfileSphere = () => {
+  const meshRef = useRef<THREE.Mesh>(null!);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <Sphere args={[1.5, 32, 32]}>
+        <meshStandardMaterial 
+          color="#8B5CF6" 
+          emissive="#8B5CF6" 
+          emissiveIntensity={0.1}
+          wireframe
+        />
+      </Sphere>
+    </mesh>
+  );
+};
+
+const About = () => {
+  const timelineItems = [
+    {
+      year: "2024",
+      title: "Senior Full Stack Developer",
+      company: "Tech Innovations Inc",
+      description: "Leading development of cutting-edge web applications using React, Node.js, and cloud technologies."
+    },
+    {
+      year: "2023",
+      title: "Frontend Specialist",
+      company: "Digital Solutions Co",
+      description: "Specialized in creating responsive, animated user interfaces with modern frameworks and libraries."
+    },
+    {
+      year: "2022",
+      title: "Junior Developer",
+      company: "StartUp Ventures",
+      description: "Started my journey in web development, learning and growing with each project."
+    }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen pt-24 pb-16 relative z-10"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              About Me
+            </span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Passionate developer crafting digital experiences that inspire and engage
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+          {/* Profile Section */}
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="space-y-6"
+          >
+            <div className="relative">
+              <div className="w-64 h-64 mx-auto mb-8">
+                <Canvas camera={{ position: [0, 0, 4] }}>
+                  <ambientLight intensity={0.4} />
+                  <pointLight position={[10, 10, 10]} intensity={0.8} />
+                  <ProfileSphere />
+                </Canvas>
+              </div>
+            </div>
+
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl font-bold mb-4 text-white">Creative Developer</h2>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                With over 5 years of experience in web development, I specialize in creating 
+                immersive digital experiences that combine beautiful design with powerful functionality. 
+                My passion lies in exploring the intersection of technology and creativity.
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                I believe in continuous learning and staying at the forefront of technology. 
+                When I'm not coding, you'll find me exploring new frameworks, contributing to 
+                open-source projects, or designing user interfaces that make people smile.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Skills Preview */}
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="space-y-6"
+          >
+            <h3 className="text-2xl font-bold mb-6 text-center lg:text-left">Core Expertise</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {["React & Next.js", "TypeScript", "Node.js", "Three.js", "Framer Motion", "Tailwind CSS", "MongoDB", "AWS"].map((skill, index) => (
+                <motion.div
+                  key={skill}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                >
+                  <span className="text-sm font-medium text-gray-300">{skill}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Timeline */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <h3 className="text-3xl font-bold text-center mb-12">My Journey</h3>
+          <div className="space-y-8">
+            {timelineItems.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1 + index * 0.2 }}
+                className="flex flex-col lg:flex-row items-center gap-8 relative"
+              >
+                <div className="lg:w-1/2 text-center lg:text-right">
+                  <span className="text-2xl font-bold text-purple-400">{item.year}</span>
+                </div>
+                
+                <div className="relative">
+                  <div className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full relative z-10" />
+                  {index < timelineItems.length - 1 && (
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-purple-400 to-transparent" />
+                  )}
+                </div>
+                
+                <div className="lg:w-1/2 text-center lg:text-left">
+                  <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                  <p className="text-purple-300 font-medium mb-2">{item.company}</p>
+                  <p className="text-gray-300 text-sm">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default About;
