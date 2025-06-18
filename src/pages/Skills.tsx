@@ -116,38 +116,32 @@ const Skills3D = () => {
   ];
 
   return (
-    <Canvas 
-      camera={{ position: [0, 0, 6], fov: 75 }}
-      onCreated={({ gl }) => {
-        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        gl.setClearColor(0x000000, 0);
-      }}
-      gl={{ 
-        antialias: true,
-        alpha: true,
-        powerPreference: "high-performance"
-      }}
-    >
-      <WebGLContextHandler />
-      <ambientLight intensity={0.6} />
-      <pointLight position={[10, 10, 10]} intensity={0.8} />
-      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
-      
-      {skills.map((skill, index) => (
-        <group key={index}>
-          <SkillSphere
-            position={skill.position}
-            skill={skill.name}
-            color={skill.color}
-          />
-          <SkillLabel 
-            position={[skill.position[0], skill.position[1] - 1.2, skill.position[2]]} 
-            text={skill.name}
-            color={skill.color}
-          />
-        </group>
-      ))}
-    </Canvas>
+    <div style={{ width: '100%', height: '100%' }}>
+      <Canvas 
+        camera={{ position: [0, 0, 6], fov: 75 }}
+        style={{ background: 'transparent' }}
+      >
+        <WebGLContextHandler />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[10, 10, 10]} intensity={0.8} />
+        <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
+        
+        {skills.map((skill, index) => (
+          <group key={index}>
+            <SkillSphere
+              position={skill.position}
+              skill={skill.name}
+              color={skill.color}
+            />
+            <SkillLabel 
+              position={[skill.position[0], skill.position[1] - 1.2, skill.position[2]]} 
+              text={skill.name}
+              color={skill.color}
+            />
+          </group>
+        ))}
+      </Canvas>
+    </div>
   );
 };
 
