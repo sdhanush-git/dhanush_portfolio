@@ -1,8 +1,6 @@
-
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, Sphere } from "@react-three/drei";
 import * as THREE from "three";
 
 const SkillSphere = ({ position, skill, color }: any) => {
@@ -17,18 +15,10 @@ const SkillSphere = ({ position, skill, color }: any) => {
 
   return (
     <group ref={meshRef} position={position}>
-      <Sphere args={[0.8, 32, 32]}>
+      <mesh>
+        <sphereGeometry args={[0.8, 32, 32]} />
         <meshStandardMaterial color={color} transparent opacity={0.7} />
-      </Sphere>
-      <Text
-        position={[0, 0, 0.9]}
-        fontSize={0.2}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {skill}
-      </Text>
+      </mesh>
     </group>
   );
 };
