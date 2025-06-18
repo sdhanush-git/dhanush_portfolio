@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const SkillSphere = ({ position, skill, color }: any) => {
@@ -23,6 +23,32 @@ const SkillSphere = ({ position, skill, color }: any) => {
   );
 };
 
+const WebGLContextHandler = () => {
+  const { gl } = useThree();
+  
+  useEffect(() => {
+    const handleContextLost = (event: Event) => {
+      console.log('WebGL context lost, attempting to restore...');
+      event.preventDefault();
+    };
+
+    const handleContextRestored = () => {
+      console.log('WebGL context restored');
+    };
+
+    const canvas = gl.domElement;
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored);
+
+    return () => {
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
+    };
+  }, [gl]);
+
+  return null;
+};
+
 const Skills3D = () => {
   const skills = [
     { name: "React", position: [-2, 0, 0], color: "#61DAFB" },
@@ -33,7 +59,19 @@ const Skills3D = () => {
   ];
 
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 75 }}>
+    <Canvas 
+      camera={{ position: [0, 0, 6], fov: 75 }}
+      onCreated={({ gl }) => {
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        gl.setClearColor(0x000000, 0);
+      }}
+      gl={{ 
+        antialias: true,
+        alpha: true,
+        powerPreference: "high-performance"
+      }}
+    >
+      <WebGLContextHandler />
       <ambientLight intensity={0.4} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />
       <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
