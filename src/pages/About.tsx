@@ -1,8 +1,6 @@
-
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sphere } from "@react-three/drei";
 import * as THREE from "three";
 
 const ProfileSphere = () => {
@@ -16,14 +14,13 @@ const ProfileSphere = () => {
 
   return (
     <mesh ref={meshRef}>
-      <Sphere args={[1.5, 32, 32]}>
-        <meshStandardMaterial 
-          color="#8B5CF6" 
-          emissive="#8B5CF6" 
-          emissiveIntensity={0.1}
-          wireframe
-        />
-      </Sphere>
+      <sphereGeometry args={[1.5, 32, 32]} />
+      <meshStandardMaterial 
+        color="#8B5CF6" 
+        emissive="#8B5CF6" 
+        emissiveIntensity={0.1}
+        wireframe
+      />
     </mesh>
   );
 };
