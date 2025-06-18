@@ -35,17 +35,14 @@ const SkillSphere = ({ position, skill, color }: any) => {
   );
 };
 
-// Custom text rendering without using drei
+// Custom text rendering without HTML canvas element
 const SkillLabel = ({ position, text, color }: { position: [number, number, number], text: string, color: string }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const textureRef = useRef<THREE.Texture | null>(null);
   const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const meshRef = useRef<THREE.Mesh>(null!);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    
-    const canvas = canvasRef.current;
+    // Create canvas programmatically
+    const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
@@ -63,31 +60,23 @@ const SkillLabel = ({ position, text, color }: { position: [number, number, numb
     ctx.textBaseline = 'middle';
     ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     
-    // Create texture
-    if (textureRef.current) {
-      textureRef.current.needsUpdate = true;
-    } else {
-      textureRef.current = new THREE.CanvasTexture(canvas);
-      materialRef.current = new THREE.MeshBasicMaterial({
-        map: textureRef.current,
-        transparent: true,
-        side: THREE.DoubleSide,
-      });
-      
-      if (meshRef.current && materialRef.current) {
-        meshRef.current.material = materialRef.current;
-      }
+    // Create texture and material
+    const texture = new THREE.CanvasTexture(canvas);
+    materialRef.current = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      side: THREE.DoubleSide,
+    });
+    
+    if (meshRef.current && materialRef.current) {
+      meshRef.current.material = materialRef.current;
     }
   }, [text, color]);
   
   return (
-    <>
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <mesh ref={meshRef} position={position}>
-        <planeGeometry args={[1, 0.25]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
-      </mesh>
-    </>
+    <mesh ref={meshRef} position={position}>
+      <planeGeometry args={[1, 0.25]} />
+    </mesh>
   );
 };
 
