@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -35,8 +36,8 @@ const SkillSphere = ({ position, skill, color }: any) => {
   );
 };
 
-// Custom text rendering without HTML canvas element
-const SkillLabel = ({ position, text, color }: { position: [number, number, number], text: string, color: string }) => {
+// Enhanced text rendering with better visibility inside circles
+const SkillLabel = ({ position, text }: { position: [number, number, number], text: string }) => {
   const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const meshRef = useRef<THREE.Mesh>(null!);
 
@@ -46,16 +47,16 @@ const SkillLabel = ({ position, text, color }: { position: [number, number, numb
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Set canvas dimensions
-    canvas.width = 256;
-    canvas.height = 64;
+    // Set canvas dimensions for better quality
+    canvas.width = 512;
+    canvas.height = 128;
     
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw text
-    ctx.fillStyle = color;
-    ctx.font = 'bold 32px Arial';
+    // Draw text with white color, bold font, and larger size
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 48px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -71,11 +72,11 @@ const SkillLabel = ({ position, text, color }: { position: [number, number, numb
     if (meshRef.current && materialRef.current) {
       meshRef.current.material = materialRef.current;
     }
-  }, [text, color]);
+  }, [text]);
   
   return (
     <mesh ref={meshRef} position={position}>
-      <planeGeometry args={[1, 0.25]} />
+      <planeGeometry args={[1.4, 0.35]} />
     </mesh>
   );
 };
@@ -134,9 +135,8 @@ const Skills3D = () => {
               color={skill.color}
             />
             <SkillLabel 
-              position={[skill.position[0], skill.position[1] - 1.2, skill.position[2]]} 
+              position={skill.position} 
               text={skill.name}
-              color={skill.color}
             />
           </group>
         ))}
