@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -36,36 +35,30 @@ const SkillSphere = ({ position, skill, color }: any) => {
   );
 };
 
-// Enhanced text rendering with better visibility inside circles
 const SkillLabel = ({ position, text }: { position: [number, number, number], text: string }) => {
   const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const meshRef = useRef<THREE.Mesh>(null!);
 
   useEffect(() => {
-    // Create canvas programmatically
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Set canvas dimensions for better quality
     canvas.width = 512;
     canvas.height = 128;
     
-    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw text with white color, bold font, and larger size
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 56px Arial';
+    ctx.font = 'bold 64px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.shadowColor = '#000000';
-    ctx.shadowBlur = 8;
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
     ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     
-    // Create texture and material
     const texture = new THREE.CanvasTexture(canvas);
     materialRef.current = new THREE.MeshBasicMaterial({
       map: texture,
@@ -81,7 +74,7 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
   
   return (
     <mesh ref={meshRef} position={position}>
-      <planeGeometry args={[1.6, 0.4]} />
+      <planeGeometry args={[1.8, 0.45]} />
     </mesh>
   );
 };
@@ -128,9 +121,9 @@ const Skills3D = () => {
         style={{ background: 'transparent' }}
       >
         <WebGLContextHandler />
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.2} />
-        <pointLight position={[-10, -10, -10]} intensity={0.6} color="#8B5CF6" />
+        <ambientLight intensity={1.0} />
+        <pointLight position={[10, 10, 10]} intensity={1.5} />
+        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8B5CF6" />
         
         {skills.map((skill, index) => (
           <group key={index}>
