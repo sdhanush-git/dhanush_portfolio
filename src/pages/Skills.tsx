@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -50,13 +51,13 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 64px Arial';
+    ctx.font = 'bold 48px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.shadowColor = '#000000';
-    ctx.shadowBlur = 10;
-    ctx.shadowOffsetX = 3;
-    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
     ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     
     const texture = new THREE.CanvasTexture(canvas);
@@ -73,8 +74,8 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
   }, [text]);
   
   return (
-    <mesh ref={meshRef} position={position}>
-      <planeGeometry args={[1.8, 0.45]} />
+    <mesh ref={meshRef} position={[position[0], position[1], position[2] + 0.1]}>
+      <planeGeometry args={[1.6, 0.4]} />
     </mesh>
   );
 };
@@ -107,11 +108,11 @@ const WebGLContextHandler = () => {
 
 const Skills3D = () => {
   const skills = [
-    { name: "React", position: [-2, 0, 0] as [number, number, number], color: "#61DAFB" },
-    { name: "TypeScript", position: [2, 1, -1] as [number, number, number], color: "#3178C6" },
-    { name: "Node.js", position: [0, -1, 1] as [number, number, number], color: "#339933" },
-    { name: "Three.js", position: [-1, 1.5, 0.5] as [number, number, number], color: "#000000" },
-    { name: "Python", position: [1.5, -0.5, -0.5] as [number, number, number], color: "#3776AB" },
+    { name: "React", position: [0, 0, 0] as [number, number, number], color: "#61DAFB" },
+    { name: "TypeScript", position: [2.5, 1, -1] as [number, number, number], color: "#3178C6" },
+    { name: "Node.js", position: [-2.5, -1, 1] as [number, number, number], color: "#339933" },
+    { name: "Three.js", position: [-2, 1.5, 0.5] as [number, number, number], color: "#000000" },
+    { name: "Python", position: [2, -1.5, -0.5] as [number, number, number], color: "#3776AB" },
   ];
 
   return (
@@ -121,7 +122,7 @@ const Skills3D = () => {
         style={{ background: 'transparent' }}
       >
         <WebGLContextHandler />
-        <ambientLight intensity={1.0} />
+        <ambientLight intensity={1.2} />
         <pointLight position={[10, 10, 10]} intensity={1.5} />
         <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8B5CF6" />
         
@@ -205,16 +206,18 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* 3D Skills Visualization */}
+        {/* 3D Skills Visualization - Centered by default */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="h-96 mb-16 relative"
+          className="h-96 mb-16 relative flex items-center justify-center"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-red-600/20 rounded-3xl blur-xl" />
-          <div className="relative h-full rounded-3xl overflow-hidden">
-            <Skills3D />
+          <div className="relative h-full w-full rounded-3xl overflow-hidden flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center">
+              <Skills3D />
+            </div>
           </div>
         </motion.div>
 
