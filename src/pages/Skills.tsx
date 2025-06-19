@@ -109,11 +109,11 @@ const WebGLContextHandler = () => {
 
 const Skills3D = () => {
   const skills = [
-    { name: "React", position: [-2, 0, 0], color: "#61DAFB" },
-    { name: "TypeScript", position: [2, 1, -1], color: "#3178C6" },
-    { name: "Node.js", position: [0, -1, 1], color: "#339933" },
-    { name: "Three.js", position: [-1, 1.5, 0.5], color: "#000000" },
-    { name: "Python", position: [1.5, -0.5, -0.5], color: "#3776AB" },
+    { name: "React", position: [-2, 0, 0] as [number, number, number], color: "#61DAFB" },
+    { name: "TypeScript", position: [2, 1, -1] as [number, number, number], color: "#3178C6" },
+    { name: "Node.js", position: [0, -1, 1] as [number, number, number], color: "#339933" },
+    { name: "Three.js", position: [-1, 1.5, 0.5] as [number, number, number], color: "#000000" },
+    { name: "Python", position: [1.5, -0.5, -0.5] as [number, number, number], color: "#3776AB" },
   ];
 
   return (
