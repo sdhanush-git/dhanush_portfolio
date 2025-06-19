@@ -1,185 +1,99 @@
 
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
-
-const SkillSphere = ({ position, skill, color }: any) => {
-  const groupRef = useRef<THREE.Group>(null!);
-  const [hovered, setHovered] = useState(false);
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
-    }
-  });
-
-  return (
-    <group 
-      ref={groupRef} 
-      position={position}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      <mesh>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial 
-          color={color} 
-          transparent 
-          opacity={0.8} 
-          emissive={color}
-          emissiveIntensity={hovered ? 0.5 : 0.3}
-        />
-      </mesh>
-    </group>
-  );
-};
-
-const SkillLabel = ({ position, text }: { position: [number, number, number], text: string }) => {
-  const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
-  const meshRef = useRef<THREE.Mesh>(null!);
-
-  useEffect(() => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    canvas.width = 512;
-    canvas.height = 128;
-    
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 48px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.shadowColor = '#000000';
-    ctx.shadowBlur = 8;
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-    
-    const texture = new THREE.CanvasTexture(canvas);
-    materialRef.current = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      side: THREE.DoubleSide,
-      alphaTest: 0.1,
-    });
-    
-    if (meshRef.current && materialRef.current) {
-      meshRef.current.material = materialRef.current;
-    }
-  }, [text]);
-  
-  return (
-    <mesh ref={meshRef} position={[position[0], position[1], position[2] + 0.1]}>
-      <planeGeometry args={[1.6, 0.4]} />
-    </mesh>
-  );
-};
-
-const WebGLContextHandler = () => {
-  const { gl } = useThree();
-  
-  useEffect(() => {
-    const handleContextLost = (event: Event) => {
-      console.log('WebGL context lost, attempting to restore...');
-      event.preventDefault();
-    };
-
-    const handleContextRestored = () => {
-      console.log('WebGL context restored');
-    };
-
-    const canvas = gl.domElement;
-    canvas.addEventListener('webglcontextlost', handleContextLost);
-    canvas.addEventListener('webglcontextrestored', handleContextRestored);
-
-    return () => {
-      canvas.removeEventListener('webglcontextlost', handleContextLost);
-      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
-    };
-  }, [gl]);
-
-  return null;
-};
-
-const Skills3D = () => {
-  const skills = [
-    { name: "React", position: [0, 0, 0] as [number, number, number], color: "#61DAFB" },
-    { name: "TypeScript", position: [2.5, 1, -1] as [number, number, number], color: "#3178C6" },
-    { name: "Node.js", position: [-2.5, -1, 1] as [number, number, number], color: "#339933" },
-    { name: "Three.js", position: [-2, 1.5, 0.5] as [number, number, number], color: "#000000" },
-    { name: "Python", position: [2, -1.5, -0.5] as [number, number, number], color: "#3776AB" },
-  ];
-
-  return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <Canvas 
-        camera={{ position: [0, 0, 6], fov: 75 }}
-        style={{ background: 'transparent' }}
-      >
-        <WebGLContextHandler />
-        <ambientLight intensity={1.2} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} />
-        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8B5CF6" />
-        
-        {skills.map((skill, index) => (
-          <group key={index}>
-            <SkillSphere
-              position={skill.position}
-              skill={skill.name}
-              color={skill.color}
-            />
-            <SkillLabel 
-              position={skill.position} 
-              text={skill.name}
-            />
-          </group>
-        ))}
-      </Canvas>
-    </div>
-  );
-};
+import { Html, Css3, Javascript, Github, Python, Java, Figma, Database, Code, Terminal } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Frontend",
+      level: "INTERMEDIATE",
       skills: [
-        { name: "React", level: 95 },
-        { name: "TypeScript", level: 90 },
-        { name: "Next.js", level: 85 },
-        { name: "Tailwind CSS", level: 92 },
-        { name: "Framer Motion", level: 88 },
-        { name: "Three.js", level: 80 }
+        { name: "HTML", icon: Html, color: "#E34F26" },
+        { name: "CSS", icon: Css3, color: "#1572B6" },
+        { name: "JavaScript", icon: Javascript, color: "#F7DF1E" },
+        { name: "SQL", icon: Database, color: "#336791" },
+        { name: "Python", icon: Python, color: "#3776AB" },
+        { name: "Java", icon: Java, color: "#007396" },
+        { name: "Figma", icon: Figma, color: "#F24E1E" },
+        { name: "Github", icon: Github, color: "#181717" }
       ]
     },
     {
-      title: "Backend",
+      level: "FAMILIAR",
       skills: [
-        { name: "Node.js", level: 88 },
-        { name: "Python", level: 85 },
-        { name: "Express.js", level: 90 },
-        { name: "MongoDB", level: 82 },
-        { name: "PostgreSQL", level: 78 },
-        { name: "GraphQL", level: 75 }
-      ]
-    },
-    {
-      title: "Tools & Others",
-      skills: [
-        { name: "Git", level: 92 },
-        { name: "Docker", level: 80 },
-        { name: "AWS", level: 75 },
-        { name: "Figma", level: 85 },
-        { name: "Jest", level: 82 },
-        { name: "CI/CD", level: 78 }
+        { name: "Bootstrap", icon: Code, color: "#7952B3" },
+        { name: "Latex", icon: Code, color: "#008080" },
+        { name: "Linux", icon: Terminal, color: "#FCC624" }
       ]
     }
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const categoryVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const skillVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: -20,
+      scale: 0.8
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.1,
+      y: -5,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: -30 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
     <motion.div
@@ -189,80 +103,139 @@ const Skills = () => {
       transition={{ duration: 0.8 }}
       className="min-h-screen pt-24 pb-16 relative z-10"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
           className="text-center mb-16"
         >
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent">
-              Skills & Expertise
+          <h1 className="text-6xl lg:text-7xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-yellow-400 via-red-400 to-purple-400 bg-clip-text text-transparent">
+              SKILLS
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Technologies and tools I use to bring ideas to life
+            My technical expertise and tools I work with
           </p>
         </motion.div>
 
-        {/* 3D Skills Visualization - Centered by default */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="h-96 mb-16 relative flex items-center justify-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-16"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-red-600/20 rounded-3xl blur-xl" />
-          <div className="relative h-full w-full rounded-3xl overflow-hidden flex items-center justify-center">
-            <div className="w-full h-full flex items-center justify-center">
-              <Skills3D />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Skill Categories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
-              key={category.title}
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 + categoryIndex * 0.2 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+              key={category.level}
+              variants={categoryVariants}
+              className="relative"
             >
-              <h3 className="text-2xl font-bold mb-6 text-center text-white">
-                {category.title}
-              </h3>
+              {/* Category Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 rounded-3xl blur-xl" />
               
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.8 + categoryIndex * 0.2 + skillIndex * 0.1 }}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-300 font-medium">{skill.name}</span>
-                      <span className="text-yellow-400 text-sm">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+              <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500">
+                {/* Category Title */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+                  className="mb-8"
+                >
+                  <h2 className="text-3xl font-bold text-white mb-2">
+                    {category.level}:
+                  </h2>
+                  <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-red-400 rounded-full" />
+                </motion.div>
+
+                {/* Skills Grid */}
+                <motion.div
+                  className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6"
+                  variants={containerVariants}
+                >
+                  {category.skills.map((skill, skillIndex) => {
+                    const IconComponent = skill.icon;
+                    return (
                       <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: 1 + categoryIndex * 0.2 + skillIndex * 0.1 }}
-                        className="bg-gradient-to-r from-yellow-400 to-red-400 h-full rounded-full relative"
+                        key={skill.name}
+                        variants={skillVariants}
+                        whileHover="hover"
+                        className="group relative"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-red-400 animate-pulse opacity-75" />
+                        {/* Skill Card */}
+                        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                          {/* Icon */}
+                          <motion.div
+                            className="flex justify-center mb-4"
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.6 }}
+                          >
+                            <IconComponent 
+                              size={40} 
+                              style={{ color: skill.color }}
+                              className="drop-shadow-lg"
+                            />
+                          </motion.div>
+                          
+                          {/* Skill Name */}
+                          <h3 className="text-white font-semibold text-lg group-hover:text-yellow-300 transition-colors duration-300">
+                            {skill.name}
+                          </h3>
+                          
+                          {/* Animated Underline */}
+                          <motion.div
+                            className="h-0.5 bg-gradient-to-r from-yellow-400 to-red-400 mt-2 rounded-full"
+                            initial={{ width: 0 }}
+                            whileHover={{ width: "100%" }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        </div>
+
+                        {/* Hover Glow Effect */}
+                        <motion.div
+                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{
+                            background: `radial-gradient(circle, ${skill.color}20 0%, transparent 70%)`,
+                            filter: "blur(10px)"
+                          }}
+                        />
                       </motion.div>
-                    </div>
-                  </motion.div>
-                ))}
+                    );
+                  })}
+                </motion.div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Floating Animation Elements */}
+        <motion.div
+          className="absolute top-1/4 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute bottom-1/4 right-10 w-16 h-16 bg-red-400/20 rounded-full blur-xl"
+          animate={{
+            y: [0, 20, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
       </div>
     </motion.div>
   );
