@@ -27,9 +27,9 @@ const SkillSphere = ({ position, skill, color }: any) => {
         <meshStandardMaterial 
           color={color} 
           transparent 
-          opacity={0.7} 
+          opacity={0.8} 
           emissive={color}
-          emissiveIntensity={hovered ? 0.5 : 0.2}
+          emissiveIntensity={hovered ? 0.5 : 0.3}
         />
       </mesh>
     </group>
@@ -56,9 +56,13 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
     
     // Draw text with white color, bold font, and larger size
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 48px Arial';
+    ctx.font = 'bold 56px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+    ctx.shadowColor = '#000000';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
     ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     
     // Create texture and material
@@ -67,6 +71,7 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
       map: texture,
       transparent: true,
       side: THREE.DoubleSide,
+      alphaTest: 0.1,
     });
     
     if (meshRef.current && materialRef.current) {
@@ -76,7 +81,7 @@ const SkillLabel = ({ position, text }: { position: [number, number, number], te
   
   return (
     <mesh ref={meshRef} position={position}>
-      <planeGeometry args={[1.4, 0.35]} />
+      <planeGeometry args={[1.6, 0.4]} />
     </mesh>
   );
 };
@@ -123,9 +128,9 @@ const Skills3D = () => {
         style={{ background: 'transparent' }}
       >
         <WebGLContextHandler />
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} intensity={0.8} />
-        <pointLight position={[-10, -10, -10]} intensity={0.4} color="#8B5CF6" />
+        <ambientLight intensity={0.8} />
+        <pointLight position={[10, 10, 10]} intensity={1.2} />
+        <pointLight position={[-10, -10, -10]} intensity={0.6} color="#8B5CF6" />
         
         {skills.map((skill, index) => (
           <group key={index}>
