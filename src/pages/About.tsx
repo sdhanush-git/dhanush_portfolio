@@ -1,29 +1,5 @@
+
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-
-const ProfileSphere = () => {
-  const meshRef = useRef<THREE.Mesh>(null!);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef}>
-      <sphereGeometry args={[1.5, 32, 32]} />
-      <meshStandardMaterial 
-        color="#8B5CF6" 
-        emissive="#8B5CF6" 
-        emissiveIntensity={0.1}
-        wireframe
-      />
-    </mesh>
-  );
-};
 
 const About = () => {
   const timelineItems = [
@@ -81,12 +57,32 @@ const About = () => {
             className="space-y-6"
           >
             <div className="relative">
-              <div className="w-64 h-64 mx-auto mb-8">
-                <Canvas camera={{ position: [0, 0, 4] }}>
-                  <ambientLight intensity={0.4} />
-                  <pointLight position={[10, 10, 10]} intensity={0.8} />
-                  <ProfileSphere />
-                </Canvas>
+              <div className="w-64 h-64 mx-auto mb-8 relative">
+                {/* Animated border rings */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 rounded-full border-2 border-dashed border-cyan-400/30"
+                />
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-2 rounded-full border border-purple-400/20"
+                />
+                
+                {/* Profile image container */}
+                <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-gradient-to-r from-cyan-400 to-purple-400 shadow-2xl">
+                  <div className="w-full h-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-full p-1">
+                    <img
+                      src="/lovable-uploads/7c362209-ea2c-4ee4-9681-4f65af706293.png"
+                      alt="Profile"
+                      className="w-full h-full object-cover rounded-full shadow-lg"
+                    />
+                  </div>
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-400/20 blur-xl opacity-60 animate-pulse" />
               </div>
             </div>
 
