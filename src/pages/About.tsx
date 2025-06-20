@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 
 const About = () => {
@@ -74,7 +73,7 @@ const About = () => {
                 <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-gradient-to-r from-cyan-400 to-purple-400 shadow-2xl">
                   <div className="w-full h-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-full p-1">
                     <img
-                      src="/lovable-uploads/7c362209-ea2c-4ee4-9681-4f65af706293.png"
+                      src="/lovable-uploads/45cc6437-057b-4213-8958-85928e2c1d44.png"
                       alt="Profile"
                       className="w-full h-full object-cover rounded-full shadow-lg"
                     />
