@@ -1,18 +1,18 @@
 
 import { motion } from "framer-motion";
-import { Html, Css3, Javascript, Github, Python, Java, Figma, Database, Code, Terminal } from "lucide-react";
+import { Code, Database, Github, Figma, Terminal } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
       level: "INTERMEDIATE",
       skills: [
-        { name: "HTML", icon: Html, color: "#E34F26" },
-        { name: "CSS", icon: Css3, color: "#1572B6" },
-        { name: "JavaScript", icon: Javascript, color: "#F7DF1E" },
+        { name: "HTML", icon: Code, color: "#E34F26" },
+        { name: "CSS", icon: Code, color: "#1572B6" },
+        { name: "JavaScript", icon: Code, color: "#F7DF1E" },
         { name: "SQL", icon: Database, color: "#336791" },
-        { name: "Python", icon: Python, color: "#3776AB" },
-        { name: "Java", icon: Java, color: "#007396" },
+        { name: "Python", icon: Code, color: "#3776AB" },
+        { name: "Java", icon: Code, color: "#007396" },
         { name: "Figma", icon: Figma, color: "#F24E1E" },
         { name: "Github", icon: Github, color: "#181717" }
       ]
@@ -49,7 +49,7 @@ const Skills = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94],
         staggerChildren: 0.1
       }
     }
@@ -67,7 +67,7 @@ const Skills = () => {
       scale: 1,
       transition: {
         duration: 0.4,
-        ease: "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     },
     hover: {
@@ -75,7 +75,7 @@ const Skills = () => {
       y: -5,
       transition: {
         duration: 0.2,
-        ease: "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
@@ -90,7 +90,7 @@ const Skills = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
