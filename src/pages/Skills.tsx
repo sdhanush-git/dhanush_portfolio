@@ -1,4 +1,5 @@
 
+
 import { motion } from "framer-motion";
 import { Code, Database, Github, Figma, Terminal } from "lucide-react";
 
@@ -49,7 +50,7 @@ const Skills = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: "easeOut",
         staggerChildren: 0.1
       }
     }
@@ -67,7 +68,7 @@ const Skills = () => {
       scale: 1,
       transition: {
         duration: 0.4,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: "easeOut"
       }
     },
     hover: {
@@ -75,7 +76,7 @@ const Skills = () => {
       y: -5,
       transition: {
         duration: 0.2,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: "easeOut"
       }
     }
   };
@@ -90,7 +91,7 @@ const Skills = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: "easeOut"
       }
     }
   };
@@ -149,9 +150,9 @@ const Skills = () => {
                   <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-red-400 rounded-full" />
                 </motion.div>
 
-                {/* Skills Grid */}
+                {/* Skills List */}
                 <motion.div
-                  className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6"
+                  className="flex flex-wrap gap-4 text-xl text-gray-200"
                   variants={containerVariants}
                 >
                   {category.skills.map((skill, skillIndex) => {
@@ -161,45 +162,30 @@ const Skills = () => {
                         key={skill.name}
                         variants={skillVariants}
                         whileHover="hover"
-                        className="group relative"
+                        className="group relative flex items-center gap-2"
                       >
-                        {/* Skill Card */}
-                        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 cursor-pointer">
-                          {/* Icon */}
-                          <motion.div
-                            className="flex justify-center mb-4"
-                            whileHover={{ rotate: 360 }}
-                            transition={{ duration: 0.6 }}
-                          >
-                            <IconComponent 
-                              size={40} 
-                              style={{ color: skill.color }}
-                              className="drop-shadow-lg"
-                            />
-                          </motion.div>
-                          
-                          {/* Skill Name */}
-                          <h3 className="text-white font-semibold text-lg group-hover:text-yellow-300 transition-colors duration-300">
-                            {skill.name}
-                          </h3>
-                          
-                          {/* Animated Underline */}
-                          <motion.div
-                            className="h-0.5 bg-gradient-to-r from-yellow-400 to-red-400 mt-2 rounded-full"
-                            initial={{ width: 0 }}
-                            whileHover={{ width: "100%" }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        </div>
-
-                        {/* Hover Glow Effect */}
+                        {/* Icon */}
                         <motion.div
-                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{
-                            background: `radial-gradient(circle, ${skill.color}20 0%, transparent 70%)`,
-                            filter: "blur(10px)"
-                          }}
-                        />
+                          className="flex-shrink-0"
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <IconComponent 
+                            size={24} 
+                            style={{ color: skill.color }}
+                            className="drop-shadow-lg"
+                          />
+                        </motion.div>
+                        
+                        {/* Skill Name */}
+                        <span className="font-medium group-hover:text-yellow-300 transition-colors duration-300">
+                          {skill.name}
+                        </span>
+                        
+                        {/* Separator */}
+                        {skillIndex < category.skills.length - 1 && (
+                          <span className="text-gray-400 mx-1">•</span>
+                        )}
                       </motion.div>
                     );
                   })}
@@ -242,3 +228,4 @@ const Skills = () => {
 };
 
 export default Skills;
+
