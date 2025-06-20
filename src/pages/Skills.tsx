@@ -1,5 +1,3 @@
-
-
 import { motion } from "framer-motion";
 import { Code, Database, Github, Figma, Terminal } from "lucide-react";
 
@@ -50,7 +48,6 @@ const Skills = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
         staggerChildren: 0.1
       }
     }
@@ -67,16 +64,14 @@ const Skills = () => {
       x: 0,
       scale: 1,
       transition: {
-        duration: 0.4,
-        ease: "easeOut"
+        duration: 0.4
       }
     },
     hover: {
       scale: 1.1,
       y: -5,
       transition: {
-        duration: 0.2,
-        ease: "easeOut"
+        duration: 0.2
       }
     }
   };
@@ -90,8 +85,7 @@ const Skills = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -228,4 +222,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
