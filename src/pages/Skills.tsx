@@ -74,7 +74,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
         >
           {skills.map((skill, index) => {
             const IconComponent = skill.icon;
@@ -83,47 +83,54 @@ const Skills = () => {
                 key={skill.name}
                 variants={cardVariants}
                 whileHover={{ 
-                  scale: 1.05,
-                  y: -5,
+                  scale: 1.1,
+                  y: -10,
                   transition: { duration: 0.2 }
                 }}
-                className="group relative"
+                animate={{
+                  y: [0, -10, 0],
+                  transition: {
+                    duration: 3 + (index % 3),
+                    repeat: Infinity,
+                    delay: index * 0.2
+                  }
+                }}
+                className="group relative flex flex-col items-center"
               >
                 {/* Background Glow */}
                 <div 
-                  className="absolute inset-0 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"
+                  className="absolute inset-0 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"
                   style={{ backgroundColor: skill.color }}
                 />
                 
-                {/* Card */}
-                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 h-full flex flex-col items-center justify-center text-center hover:bg-white/10 transition-all duration-300">
+                {/* Circular Card */}
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-full w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex flex-col items-center justify-center text-center hover:bg-white/10 transition-all duration-300 mb-4">
                   {/* Icon */}
                   <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
-                    className="mb-4"
                   >
                     <IconComponent 
-                      size={40} 
+                      size={32} 
                       style={{ color: skill.color }}
                       className="drop-shadow-lg"
                     />
                   </motion.div>
-                  
-                  {/* Skill Name */}
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-yellow-300 transition-colors duration-300">
-                    {skill.name}
-                  </h3>
-                  
-                  {/* Level Badge */}
-                  <span className={`text-xs px-3 py-1 rounded-full font-medium ${
-                    skill.level === "Intermediate" 
-                      ? "bg-green-500/20 text-green-300 border border-green-500/30" 
-                      : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                  }`}>
-                    {skill.level}
-                  </span>
                 </div>
+                
+                {/* Skill Name */}
+                <h3 className="text-sm md:text-base font-semibold text-white mb-2 group-hover:text-yellow-300 transition-colors duration-300 text-center">
+                  {skill.name}
+                </h3>
+                
+                {/* Level Badge */}
+                <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                  skill.level === "Intermediate" 
+                    ? "bg-green-500/20 text-green-300 border border-green-500/30" 
+                    : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                }`}>
+                  {skill.level}
+                </span>
               </motion.div>
             );
           })}
@@ -152,6 +159,20 @@ const Skills = () => {
             duration: 3,
             repeat: Infinity,
             delay: 1
+          }}
+        />
+
+        <motion.div
+          className="absolute top-1/2 right-1/4 w-12 h-12 bg-pink-400/20 rounded-full blur-xl"
+          animate={{
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            delay: 2
           }}
         />
       </div>
