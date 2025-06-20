@@ -13,7 +13,6 @@ import Skills from "./pages/Skills";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
-import Profiles from "./pages/Profiles";
 import NotFound from "./pages/NotFound";
 import ParticleBackground from "./components/ParticleBackground";
 
@@ -37,7 +36,6 @@ const App = () => (
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
-              <Route path="/profiles" element={<Profiles />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -15,7 +14,6 @@ const Navigation = () => {
     { path: "/skills", label: "Skills" },
     { path: "/resume", label: "Resume" },
     { path: "/blog", label: "Coursework" },
-    { path: "/profiles", label: "Profiles" },
     { path: "/contact", label: "Contact" },
   ];
 
