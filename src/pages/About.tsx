@@ -5,21 +5,21 @@ const About = () => {
   const timelineItems = [
     {
       year: "2024",
-      title: "Senior Full Stack Developer",
-      company: "Tech Innovations Inc",
-      description: "Leading development of cutting-edge web applications using React, Node.js, and cloud technologies."
+      title: "Master of Computer Application",
+      company: "AVS COLLEGE OF ARTS AND SCIENCE",
+      description: "Attur Main Road, Ramalingapuram, Salem.   /   CGPA:8.1"
     },
     {
-      year: "2023",
-      title: "Frontend Specialist",
-      company: "Digital Solutions Co",
-      description: "Specialized in creating responsive, animated user interfaces with modern frameworks and libraries."
+      year: "2024",
+      title: "BSC Computer Science",
+      company: "SRI GANESH COLLEGE OF ARTS AND SCIENCE",
+      description: "Ammapet, Salem.   /   CGPA:7.5"
     },
     {
-      year: "2022",
-      title: "Junior Developer",
-      company: "StartUp Ventures",
-      description: "Started my journey in web development, learning and growing with each project."
+      year: "2021",
+      title: "Computer Science",
+      company: "VIDHYA VAASHINI HIGHER SECONDARY SCHOOL",
+      description: "Attayampatty, Salem.   /   Percentage : 75% "
     }
   ];
 
@@ -74,7 +74,7 @@ const About = () => {
                 <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-gradient-to-r from-cyan-400 to-purple-400 shadow-2xl">
                   <div className="w-full h-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-full p-1">
                     <img
-                      src="/lovable-uploads/ca0ff487-62f2-426d-9855-3e1ed2103edb.png"
+                      src="/lovable-uploads/3.png"
                       alt="Profile"
                       className="w-full h-full object-cover rounded-full shadow-lg"
                     />
