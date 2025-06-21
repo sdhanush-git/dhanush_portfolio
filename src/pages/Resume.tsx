@@ -100,10 +100,9 @@ const Resume = () => {
           >
             <h3 className="text-xl font-bold text-orange-400 mb-4">Professional Summary</h3>
             <p className="text-gray-300 leading-relaxed">
-              Passionate Full Stack Developer with 5+ years of experience creating innovative web applications. 
-              Specialized in React, Node.js, and modern web technologies. Strong background in 3D graphics, 
-              animation, and user experience design. Proven track record of delivering high-quality solutions 
-              for startups and enterprise clients.
+              Passionate Full Stack Developer with strong foundation in modern web technologies. 
+              Specialized in React, Node.js, and 3D graphics through hands-on internship experience. 
+              Eager to contribute innovative solutions and continue learning in a dynamic development environment.
             </p>
           </motion.section>
 
@@ -271,46 +270,6 @@ const Resume = () => {
                   />
                 </motion.div>
               ))}
-            </div>
-          </motion.section>
-
-          {/* Experience */}
-          <motion.section
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <h3 className="text-xl font-bold text-orange-400 mb-6">Experience</h3>
-            <div className="space-y-6">
-              <div>
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="text-lg font-semibold text-white">Senior Full Stack Developer</h4>
-                    <p className="text-pink-300">Tech Innovations Inc</p>
-                  </div>
-                  <span className="text-gray-400">2023 - Present</span>
-                </div>
-                <ul className="text-gray-300 text-sm space-y-1 ml-4">
-                  <li>• Led development of 5+ high-impact web applications using React and Node.js</li>
-                  <li>• Implemented 3D visualizations and animations improving user engagement by 40%</li>
-                  <li>• Mentored junior developers and established coding standards for the team</li>
-                </ul>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="text-lg font-semibold text-white">Frontend Specialist</h4>
-                    <p className="text-pink-300">Digital Solutions Co</p>
-                  </div>
-                  <span className="text-gray-400">2022 - 2023</span>
-                </div>
-                <ul className="text-gray-300 text-sm space-y-1 ml-4">
-                  <li>• Developed responsive web applications with modern frameworks</li>
-                  <li>• Collaborated with design teams to create pixel-perfect UI implementations</li>
-                  <li>• Optimized application performance reducing load times by 60%</li>
-                </ul>
-              </div>
             </div>
           </motion.section>
 
