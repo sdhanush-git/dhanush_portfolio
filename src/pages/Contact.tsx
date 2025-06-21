@@ -26,6 +26,14 @@ const Contact = () => {
     });
   };
 
+  const handleEmailClick = () => {
+    window.location.href = "mailto:medhanush100@gmail.com";
+  };
+
+  const handlePhoneClick = () => {
+    window.open("https://wa.me/919629736731", "_blank");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, rotateX: 90 }}
@@ -71,27 +79,29 @@ const Contact = () => {
             <div className="space-y-6">
               <motion.div
                 whileHover={{ x: 10 }}
-                className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300"
+                onClick={handleEmailClick}
+                className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 cursor-pointer group"
               >
-                <div className="p-3 bg-teal-500/20 rounded-full">
+                <div className="p-3 bg-teal-500/20 rounded-full group-hover:bg-teal-500/30 transition-colors">
                   <Mail className="text-teal-400" size={24} />
                 </div>
                 <div>
                   <h3 className="text-white font-semibold">Email</h3>
-                  <p className="text-gray-300">john@example.com</p>
+                  <p className="text-gray-300 group-hover:text-teal-400 transition-colors">medhanush100@gmail.com</p>
                 </div>
               </motion.div>
 
               <motion.div
                 whileHover={{ x: 10 }}
-                className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300"
+                onClick={handlePhoneClick}
+                className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 cursor-pointer group"
               >
-                <div className="p-3 bg-blue-500/20 rounded-full">
+                <div className="p-3 bg-blue-500/20 rounded-full group-hover:bg-blue-500/30 transition-colors">
                   <Phone className="text-blue-400" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Phone</h3>
-                  <p className="text-gray-300">+1 (555) 123-4567</p>
+                  <h3 className="text-white font-semibold">WhatsApp</h3>
+                  <p className="text-gray-300 group-hover:text-blue-400 transition-colors">+91 9629736731</p>
                 </div>
               </motion.div>
 
@@ -104,7 +114,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold">Location</h3>
-                  <p className="text-gray-300">San Francisco, CA</p>
+                  <p className="text-gray-300">Salem, Tamil Nadu</p>
                 </div>
               </motion.div>
             </div>
