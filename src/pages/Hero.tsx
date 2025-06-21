@@ -22,11 +22,13 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
+              <span className="text-white">Hi, I'm</span>
+              <br />
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                Creative
+                DHANUSH
               </span>
               <br />
-              <span className="text-white">Developer</span>
+              <span className="text-white">Creative Developer</span>
             </h1>
           </motion.div>
 
@@ -36,7 +38,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-300 leading-relaxed"
           >
-            I craft exceptional digital experiences through innovative design and cutting-edge technology. 
+            I'm DHANUSH, a passionate developer who crafts exceptional digital experiences through innovative design and cutting-edge technology. 
             Welcome to my creative universe where code meets artistry.
           </motion.p>
 
