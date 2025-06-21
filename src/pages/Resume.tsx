@@ -1,5 +1,6 @@
+
 import { motion } from "framer-motion";
-import { Download, Mail, Phone, MapPin, Globe, Building2 } from "lucide-react";
+import { Download, Mail, Phone, MapPin, Globe, Building2, GraduationCap } from "lucide-react";
 
 const Resume = () => {
   const handleDownload = () => {
@@ -28,6 +29,33 @@ const Resume = () => {
       duration: "Summer 2021",
       description: "Created scalable web applications using modern technologies",
       technologies: ["Node.js", "React", "AWS", "MongoDB"]
+    }
+  ];
+
+  const educationData = [
+    {
+      degree: "Master of Computer Application",
+      institution: "AVS COLLEGE OF ARTS AND SCIENCE",
+      location: "Attur Main Road, Ramalingapuram, Salem",
+      duration: "Pursuing",
+      grade: "CGPA: 8.1 / 10",
+      status: "current"
+    },
+    {
+      degree: "BSC Computer Science",
+      institution: "SRI GANESH COLLEGE OF ARTS AND SCIENCE",
+      location: "Ammapet, Salem",
+      duration: "May 2024",
+      grade: "CGPA: 7.4 / 10",
+      status: "completed"
+    },
+    {
+      degree: "Computer Science",
+      institution: "VIDHYA VAASHINI HIGHER SECONDARY SCHOOL",
+      location: "Attayampatty, Salem",
+      duration: "May 2021",
+      grade: "Percentage: 75%",
+      status: "completed"
     }
   ];
 
@@ -279,15 +307,182 @@ const Resume = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.0 }}
           >
-            <h3 className="text-xl font-bold text-orange-400 mb-4">Education</h3>
-            <div>
-              <div className="flex justify-between items-start">
-                <div>
-                  <h4 className="text-lg font-semibold text-white">Bachelor of Science in Computer Science</h4>
-                  <p className="text-pink-300">University of Technology</p>
-                </div>
-                <span className="text-gray-400">2018 - 2022</span>
-              </div>
+            <div className="flex items-center gap-3 mb-6">
+              <motion.div
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <GraduationCap className="text-blue-400" size={24} />
+              </motion.div>
+              <h3 className="text-xl font-bold text-blue-400">Education</h3>
+            </div>
+            
+            <div className="space-y-6">
+              {educationData.map((education, index) => (
+                <motion.div
+                  key={education.institution}
+                  initial={{ 
+                    opacity: 0, 
+                    y: 30,
+                    scale: 0.9
+                  }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    scale: 1
+                  }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 1.2 + index * 0.2,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    y: -5,
+                    boxShadow: "0 10px 30px rgba(59, 130, 246, 0.2)",
+                    transition: { duration: 0.3 }
+                  }}
+                  className={`relative bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border ${
+                    education.status === 'current' 
+                      ? 'border-blue-400/30 shadow-blue-400/20' 
+                      : 'border-blue-400/20'
+                  } rounded-xl p-6 group cursor-pointer overflow-hidden`}
+                >
+                  {/* Animated Background for Current Education */}
+                  {education.status === 'current' && (
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/20 to-blue-600/0"
+                      animate={{
+                        x: ["-100%", "100%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: index * 0.5
+                      }}
+                    />
+                  )}
+                  
+                  <div className="relative z-10">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex-1">
+                        <motion.h4 
+                          className={`text-lg font-semibold ${
+                            education.status === 'current' ? 'text-blue-300' : 'text-white'
+                          } group-hover:text-blue-300 transition-colors duration-300`}
+                          whileHover={{ scale: 1.02 }}
+                        >
+                          {education.degree}
+                        </motion.h4>
+                        <motion.p 
+                          className="text-blue-300 font-medium text-sm mb-1"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.4 + index * 0.2 }}
+                        >
+                          {education.institution}
+                        </motion.p>
+                        <motion.p 
+                          className="text-gray-400 text-xs"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.5 + index * 0.2 }}
+                        >
+                          {education.location}
+                        </motion.p>
+                      </div>
+                      <div className="text-right">
+                        <motion.span 
+                          className={`text-sm font-medium ${
+                            education.status === 'current' ? 'text-blue-300' : 'text-gray-400'
+                          }`}
+                          animate={{ 
+                            opacity: education.status === 'current' ? [0.7, 1, 0.7] : 1
+                          }}
+                          transition={{ 
+                            duration: 2,
+                            repeat: education.status === 'current' ? Infinity : 0,
+                            delay: index * 0.3
+                          }}
+                        >
+                          {education.duration}
+                        </motion.span>
+                        <motion.p 
+                          className="text-blue-400 text-sm font-semibold mt-1"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ 
+                            delay: 1.6 + index * 0.2,
+                            type: "spring",
+                            stiffness: 200
+                          }}
+                        >
+                          {education.grade}
+                        </motion.p>
+                      </div>
+                    </div>
+                    
+                    {/* Status Indicator */}
+                    {education.status === 'current' && (
+                      <motion.div
+                        className="flex items-center gap-2 mt-3"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.7 + index * 0.2 }}
+                      >
+                        <motion.div
+                          className="w-2 h-2 bg-blue-400 rounded-full"
+                          animate={{
+                            scale: [1, 1.3, 1],
+                            opacity: [1, 0.7, 1]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity
+                          }}
+                        />
+                        <span className="text-xs text-blue-300 font-medium">Currently Pursuing</span>
+                      </motion.div>
+                    )}
+                  </div>
+                  
+                  {/* Floating Academic Icons */}
+                  <motion.div
+                    className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full"
+                    animate={{
+                      y: [0, -8, 0],
+                      opacity: [0.3, 1, 0.3],
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      delay: index * 0.4
+                    }}
+                  />
+                  <motion.div
+                    className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-indigo-400 rounded-full"
+                    animate={{
+                      y: [0, 6, 0],
+                      opacity: [0.3, 1, 0.3],
+                      scale: [1, 1.4, 1]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: index * 0.6
+                    }}
+                  />
+                </motion.div>
+              ))}
             </div>
           </motion.section>
 
