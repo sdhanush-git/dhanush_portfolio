@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 
 const Blog = () => {
@@ -9,6 +8,13 @@ const Blog = () => {
       grade: "A",
       semester: "Fall 2023",
       image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop"
+    },
+    {
+      title: "Prompt Engineering",
+      description: "Advanced techniques for crafting effective prompts for AI systems, understanding AI behavior, and optimizing human-AI interactions.",
+      grade: "A+",
+      semester: "Spring 2024",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop"
     },
     {
       title: "Object Oriented Programming",
@@ -36,14 +42,14 @@ const Blog = () => {
       description: "Basic programming concepts, syntax, control structures, and problem-solving methodologies using various programming languages.",
       grade: "A",
       semester: "Fall 2023",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop"
     },
     {
-      title: "Basics of Linux",
-      description: "Linux operating system fundamentals, command line interface, file systems, and system administration basics.",
+      title: "Intermediate of Linux",
+      description: "Advanced Linux operating system concepts, shell scripting, system administration, and server management techniques.",
       grade: "A-",
       semester: "Spring 2024",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=300&fit=crop"
     }
   ];
 
