@@ -166,15 +166,6 @@ const Blog = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Animated border */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${course.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none`} 
-                     style={{ 
-                       background: `linear-gradient(45deg, transparent, transparent, rgba(255,255,255,0.1), transparent, transparent)`,
-                       backgroundSize: '200% 200%',
-                       animation: 'gradient-shift 3s ease infinite'
-                     }} 
-                />
               </div>
             </motion.div>
           ))}
@@ -202,7 +193,7 @@ const Blog = () => {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
