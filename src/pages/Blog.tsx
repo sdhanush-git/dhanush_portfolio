@@ -8,7 +8,6 @@ const Blog = () => {
       description: "Modern web development technologies including HTML, CSS, JavaScript, and frameworks for building responsive web applications.",
       grade: "A",
       semester: "Fall 2023",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop",
       color: "from-blue-500 to-cyan-500"
     },
     {
@@ -16,7 +15,6 @@ const Blog = () => {
       description: "Advanced techniques for crafting effective prompts for AI systems, understanding AI behavior, and optimizing human-AI interactions.",
       grade: "A+",
       semester: "Spring 2024",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
       color: "from-purple-500 to-pink-500"
     },
     {
@@ -24,7 +22,6 @@ const Blog = () => {
       description: "Core OOP concepts including classes, objects, inheritance, polymorphism, and encapsulation using modern programming languages.",
       grade: "A+",
       semester: "Spring 2024",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop",
       color: "from-green-500 to-emerald-500"
     },
     {
@@ -32,7 +29,6 @@ const Blog = () => {
       description: "Fundamental data structures like arrays, linked lists, stacks, queues and basic algorithmic problem-solving techniques.",
       grade: "A",
       semester: "Fall 2023",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
       color: "from-orange-500 to-red-500"
     },
     {
@@ -40,7 +36,6 @@ const Blog = () => {
       description: "Database design principles, SQL queries, normalization, and database administration using relational database systems.",
       grade: "A+",
       semester: "Spring 2024",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
       color: "from-indigo-500 to-blue-500"
     },
     {
@@ -48,7 +43,6 @@ const Blog = () => {
       description: "Basic programming concepts, syntax, control structures, and problem-solving methodologies using various programming languages.",
       grade: "A",
       semester: "Fall 2023",
-      image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop",
       color: "from-teal-500 to-cyan-500"
     },
     {
@@ -56,7 +50,6 @@ const Blog = () => {
       description: "Advanced Linux operating system concepts, shell scripting, system administration, and server management techniques.",
       grade: "A-",
       semester: "Spring 2024",
-      image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=300&fit=crop",
       color: "from-yellow-500 to-orange-500"
     }
   ];
@@ -93,7 +86,7 @@ const Blog = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {coursework.map((course, index) => (
             <motion.div
@@ -102,70 +95,51 @@ const Blog = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
                 delay: 0.5 + index * 0.1, 
-                duration: 0.7,
+                duration: 0.6,
                 type: "spring",
                 stiffness: 100
               }}
               whileHover={{ 
-                scale: 1.05, 
-                y: -10,
-                transition: { duration: 0.3 }
+                scale: 1.03, 
+                y: -5,
+                transition: { duration: 0.2 }
               }}
               className="group relative"
             >
-              {/* Card container */}
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20">
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+              <div className="relative bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 h-full flex flex-col">
+                {/* Gradient accent line */}
+                <div className={`w-full h-1 bg-gradient-to-r ${course.color} rounded-full mb-4`} />
                 
-                {/* Image section */}
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Image overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
-                  {/* Grade badge */}
-                  <motion.div 
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
-                    className="absolute top-4 right-4"
-                  >
-                    <div className={`bg-gradient-to-r ${course.color} text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm border border-white/20`}>
-                      {course.grade}
-                    </div>
-                  </motion.div>
+                {/* Header with title and grade */}
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-lg font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300 flex-1 pr-2">
+                    {course.title}
+                  </h3>
+                  <div className={`bg-gradient-to-r ${course.color} text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg flex-shrink-0`}>
+                    {course.grade}
+                  </div>
                 </div>
 
-                {/* Content section */}
-                <div className="p-6 space-y-4">
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
-                      {course.title}
-                    </h3>
-                    
-                    <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors duration-300">
-                      {course.description}
-                    </p>
-                  </div>
+                {/* Description */}
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-1 group-hover:text-gray-200 transition-colors duration-300">
+                  {course.description}
+                </p>
 
-                  {/* Footer */}
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                    <span className="text-sm text-gray-400 font-medium">
-                      {course.semester}
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                  <span className="text-sm text-gray-400 font-medium">
+                    {course.semester}
+                  </span>
+                  <div className="flex items-center space-x-2">
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${course.color}`} />
+                    <span className="text-sm text-cyan-400 font-medium">
+                      Completed
                     </span>
-                    <div className="flex items-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${course.color}`} />
-                      <span className="text-sm text-cyan-400 font-medium">
-                        Completed
-                      </span>
-                    </div>
                   </div>
                 </div>
+
+                {/* Hover effect overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl pointer-events-none`} />
               </div>
             </motion.div>
           ))}
@@ -192,13 +166,6 @@ const Blog = () => {
           </div>
         </motion.div>
       </div>
-
-      <style>{`
-        @keyframes gradient-shift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-      `}</style>
     </motion.div>
   );
 };
