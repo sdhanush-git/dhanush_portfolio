@@ -44,7 +44,7 @@ const About = () => {
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Passionate developer crafting digital experiences that inspire and engage
+            Passionate fresher ready to embark on a journey in software development
           </p>
         </motion.div>
 
@@ -87,16 +87,16 @@ const About = () => {
             </div>
 
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl font-bold mb-4 text-white">Creative Developer</h2>
+              <h2 className="text-3xl font-bold mb-4 text-white">Aspiring Developer</h2>
               <p className="text-gray-300 leading-relaxed mb-6">
-                With over 5 years of experience in web development, I specialize in creating 
-                immersive digital experiences that combine beautiful design with powerful functionality. 
-                My passion lies in exploring the intersection of technology and creativity.
+                As a recent graduate with a Master's in Computer Application, I'm eager to begin my 
+                career in software development. My academic journey has equipped me with strong fundamentals 
+                in programming and a passion for creating innovative digital solutions.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                I believe in continuous learning and staying at the forefront of technology. 
-                When I'm not coding, you'll find me exploring new frameworks, contributing to 
-                open-source projects, or designing user interfaces that make people smile.
+                I believe in continuous learning and staying updated with the latest technologies. 
+                I'm excited to apply my theoretical knowledge to real-world projects and contribute 
+                to meaningful software development initiatives while growing as a professional.
               </p>
             </div>
           </motion.div>
@@ -108,7 +108,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold mb-6 text-center lg:text-left">Core Expertise</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center lg:text-left">Technical Skills</h3>
             <div className="grid grid-cols-2 gap-4">
               {["React & Next.js", "TypeScript", "Node.js", "Three.js", "Framer Motion", "Tailwind CSS", "MongoDB", "AWS"].map((skill, index) => (
                 <motion.div
@@ -131,7 +131,7 @@ const About = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3 className="text-3xl font-bold text-center mb-12">My Journey</h3>
+          <h3 className="text-3xl font-bold text-center mb-12">Educational Journey</h3>
           <div className="space-y-8">
             {timelineItems.map((item, index) => (
               <motion.div
