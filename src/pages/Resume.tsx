@@ -59,6 +59,19 @@ const Resume = () => {
     }
   ];
 
+  const skillCategories = [
+    {
+      title: "INTERMEDIATE",
+      skills: ["HTML", "CSS", "Bootstrap", "JavaScript", "SQL", "Java", "Figma", "Github"],
+      color: "from-blue-400 to-purple-500"
+    },
+    {
+      title: "FAMILIAR",
+      skills: ["Latex", "Linux", "React"],
+      color: "from-green-400 to-blue-500"
+    }
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -99,23 +112,19 @@ const Resume = () => {
         >
           {/* Header */}
           <div className="text-center border-b border-white/10 pb-8">
-            <h2 className="text-3xl font-bold text-white mb-4">John Developer</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">DHANUSH Developer</h2>
             <div className="flex flex-wrap justify-center gap-6 text-gray-300">
               <div className="flex items-center gap-2">
                 <Mail size={16} />
-                <span>john@example.com</span>
+                <span>medhanush100@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 9629 736 731</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>San Francisco, CA</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Globe size={16} />
-                <span>portfolio.com</span>
+                <span>Salem, TamilNadu</span>
               </div>
             </div>
           </div>
@@ -128,9 +137,9 @@ const Resume = () => {
           >
             <h3 className="text-xl font-bold text-orange-400 mb-4">Professional Summary</h3>
             <p className="text-gray-300 leading-relaxed">
-              Passionate Full Stack Developer with strong foundation in modern web technologies. 
-              Specialized in React, Node.js, and 3D graphics through hands-on internship experience. 
-              Eager to contribute innovative solutions and continue learning in a dynamic development environment.
+              Recent Computer Science graduate with a Master's in Computer Application, eager to begin my career in software development. 
+              Strong foundation in programming languages including Java, JavaScript, and web technologies. 
+              Passionate about learning new technologies and contributing to innovative software solutions as a fresher in the tech industry.
             </p>
           </motion.section>
 
@@ -492,12 +501,67 @@ const Resume = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            <h3 className="text-xl font-bold text-orange-400 mb-4">Technical Skills</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {["React", "Node.js", "TypeScript", "Three.js", "MongoDB", "AWS", "Docker", "GraphQL"].map((skill) => (
-                <div key={skill} className="bg-white/10 rounded-lg p-2 text-center">
-                  <span className="text-sm text-gray-300">{skill}</span>
-                </div>
+            <h3 className="text-xl font-bold text-orange-400 mb-6">Technical Skills</h3>
+            <div className="space-y-6">
+              {skillCategories.map((category, categoryIndex) => (
+                <motion.div
+                  key={category.title}
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.4 + categoryIndex * 0.2 }}
+                  className="space-y-3"
+                >
+                  <h4 className="text-lg font-semibold text-cyan-400 mb-3">
+                    {category.title}
+                  </h4>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.div
+                        key={skill}
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: 1.6 + categoryIndex * 0.2 + skillIndex * 0.1,
+                          type: "spring",
+                          stiffness: 200
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          y: -2,
+                          boxShadow: "0 8px 25px rgba(59, 130, 246, 0.3)"
+                        }}
+                        className="group relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 text-center hover:bg-white/15 transition-all duration-300 cursor-pointer overflow-hidden"
+                      >
+                        <motion.div
+                          className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                        />
+                        
+                        <span className="text-sm text-gray-300 font-medium relative z-10 group-hover:text-white transition-colors duration-300">
+                          {skill}
+                        </span>
+                        
+                        <motion.div
+                          className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${category.color} w-0 group-hover:w-full transition-all duration-500`}
+                        />
+                        
+                        <motion.div
+                          className="absolute top-1 right-1 w-1 h-1 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100"
+                          animate={{
+                            scale: [1, 1.3, 1],
+                            opacity: [0.3, 1, 0.3]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: skillIndex * 0.2
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.section>
