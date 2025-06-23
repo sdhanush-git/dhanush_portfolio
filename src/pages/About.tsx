@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 
 const About = () => {
@@ -20,6 +19,28 @@ const About = () => {
       title: "Computer Science",
       company: "VIDHYA VAASHINI HIGHER SECONDARY SCHOOL",
       description: "Attayampatty, Salem.   /   Percentage : 75% "
+    }
+  ];
+
+  const skillCategories = [
+    {
+      title: "Programming Languages",
+      skills: [
+        { name: "MERN Stack", level: "In Progress", color: "from-green-400 to-blue-500" },
+        { name: "HTML/CSS", level: "Intermediate", color: "from-orange-400 to-red-500" },
+        { name: "Bootstrap", level: "Basics", color: "from-purple-400 to-pink-500" },
+        { name: "Java", level: "Intermediate", color: "from-blue-400 to-indigo-500" },
+        { name: "SQL", level: "Basics", color: "from-yellow-400 to-orange-500" },
+        { name: "Linux", level: "Basics", color: "from-gray-400 to-gray-600" }
+      ]
+    },
+    {
+      title: "Tools",
+      skills: [
+        { name: "Figma", level: "Intermediate", color: "from-pink-400 to-purple-500" },
+        { name: "Github", level: "Intermediate", color: "from-gray-400 to-black" },
+        { name: "Cursor", level: "Intermediate", color: "from-cyan-400 to-blue-500" }
+      ]
     }
   ];
 
@@ -49,7 +70,6 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Profile Section */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -58,7 +78,6 @@ const About = () => {
           >
             <div className="relative">
               <div className="w-64 h-64 mx-auto mb-8 relative">
-                {/* Animated border rings */}
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -70,7 +89,6 @@ const About = () => {
                   className="absolute inset-2 rounded-full border border-purple-400/20"
                 />
                 
-                {/* Profile image container */}
                 <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-gradient-to-r from-cyan-400 to-purple-400 shadow-2xl">
                   <div className="w-full h-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-full p-1">
                     <img
@@ -81,7 +99,6 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Glow effect */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-400/20 blur-xl opacity-60 animate-pulse" />
               </div>
             </div>
@@ -101,31 +118,67 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Skills Preview */}
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="space-y-6"
+            className="space-y-8"
           >
             <h3 className="text-2xl font-bold mb-6 text-center lg:text-left">Technical Skills</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {["React & Next.js", "TypeScript", "Node.js", "Three.js", "Framer Motion", "Tailwind CSS", "MongoDB", "AWS"].map((skill, index) => (
-                <motion.div
-                  key={skill}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
-                  <span className="text-sm font-medium text-gray-300">{skill}</span>
-                </motion.div>
-              ))}
-            </div>
+            
+            {skillCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={category.title}
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 + categoryIndex * 0.2 }}
+                className="space-y-4"
+              >
+                <h4 className="text-lg font-semibold text-cyan-400 mb-3">
+                  {category.title}
+                </h4>
+                
+                <div className="space-y-3">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 1 + categoryIndex * 0.2 + skillIndex * 0.1 }}
+                      className="group relative"
+                    >
+                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                        <div className="flex items-center justify-between">
+                          <span className="text-white font-medium">{skill.name}</span>
+                          <div className="flex items-center space-x-2">
+                            <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium`}>
+                              {skill.level}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-2 h-1 bg-white/10 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ 
+                              width: skill.level === "In Progress" ? "70%" : 
+                                     skill.level === "Intermediate" ? "60%" : "30%" 
+                            }}
+                            transition={{ duration: 1, delay: 1.2 + categoryIndex * 0.2 + skillIndex * 0.1 }}
+                            className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg blur-sm`} />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
 
-        {/* Timeline */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
