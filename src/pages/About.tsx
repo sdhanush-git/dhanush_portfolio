@@ -74,7 +74,7 @@ const About = () => {
                 <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-gradient-to-r from-cyan-400 to-purple-400 shadow-2xl">
                   <div className="w-full h-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-full p-1">
                     <img
-                      src="/lovable-uploads/3.png"
+                      src="/lovable-uploads/80733745-af46-4165-854f-cae4e4c73919.png"
                       alt="Profile"
                       className="w-full h-full object-cover rounded-full shadow-lg"
                     />
