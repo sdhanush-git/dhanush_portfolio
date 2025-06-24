@@ -4,7 +4,13 @@ import { Download, Mail, Phone, MapPin, Globe, Building2, GraduationCap } from "
 
 const Resume = () => {
   const handleDownload = () => {
-    // In a real app, this would download the actual PDF
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = '/Dhanush.pdf';
+    link.download = 'Dhanush-Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     console.log("Downloading resume...");
   };
 
