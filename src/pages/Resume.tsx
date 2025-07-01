@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Download, Mail, Phone, MapPin, Globe, Building2, GraduationCap } from "lucide-react";
 
@@ -16,25 +15,18 @@ const Resume = () => {
 
   const internships = [
     {
-      company: "Microsoft",
-      position: "Software Engineering Intern",
-      duration: "Summer 2023",
-      description: "Developed cloud-based solutions using Azure services and React",
-      technologies: ["React", "Azure", "TypeScript", "C#"]
-    },
-    {
-      company: "Google",
-      position: "Frontend Development Intern",
-      duration: "Summer 2022",
-      description: "Built responsive web applications and improved user experience",
-      technologies: ["JavaScript", "Angular", "Material Design", "Firebase"]
-    },
-    {
-      company: "Amazon",
-      position: "Full Stack Intern",
-      duration: "Summer 2021",
-      description: "Created scalable web applications using modern technologies",
-      technologies: ["Node.js", "React", "AWS", "MongoDB"]
+      company: "TRIPLE TECH SOFT",
+      position: "Software Development Intern | Python",
+      duration: "June 2023 - July 2023",
+      location: "Fairlands, Salem",
+      description: "Received an introduction to the fundamentals of Python programming and learned about data types, variables, loops, and conditional statements.",
+      highlights: [
+        "Practiced writing and debugging Python code",
+        "Learned basic concepts such as functions, modules, and data structures",
+        "Gained solid foundation for further study and practical application of Python programming",
+        "Explored new techniques and learned from others, showcasing collaborative skills",
+        "Utilized version control system to manage codebase and track changes"
+      ]
     }
   ];
 
@@ -178,13 +170,11 @@ const Resume = () => {
                   key={internship.company}
                   initial={{ 
                     opacity: 0, 
-                    x: index % 2 === 0 ? -50 : 50,
-                    rotateY: index % 2 === 0 ? -15 : 15
+                    y: 30
                   }}
                   animate={{ 
                     opacity: 1, 
-                    x: 0,
-                    rotateY: 0
+                    y: 0
                   }}
                   transition={{ 
                     duration: 0.8, 
@@ -194,25 +184,11 @@ const Resume = () => {
                   }}
                   whileHover={{ 
                     scale: 1.02,
-                    rotateX: 5,
                     boxShadow: "0 20px 40px rgba(147, 51, 234, 0.2)",
                     transition: { duration: 0.3 }
                   }}
                   className="relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/20 rounded-xl p-6 group cursor-pointer overflow-hidden"
                 >
-                  {/* Animated Background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/10 to-purple-600/0"
-                    animate={{
-                      x: ["-100%", "100%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 0.5
-                    }}
-                  />
-                  
                   <div className="relative z-10">
                     <div className="flex justify-between items-start mb-3">
                       <div>
@@ -229,6 +205,14 @@ const Resume = () => {
                           transition={{ delay: 1.2 + index * 0.2 }}
                         >
                           {internship.company}
+                        </motion.p>
+                        <motion.p 
+                          className="text-gray-400 text-sm"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.3 + index * 0.2 }}
+                        >
+                          {internship.location}
                         </motion.p>
                       </div>
                       <motion.span 
@@ -255,62 +239,21 @@ const Resume = () => {
                       {internship.description}
                     </motion.p>
                     
-                    <div className="flex flex-wrap gap-2">
-                      {internship.technologies.map((tech, techIndex) => (
-                        <motion.span
-                          key={tech}
-                          initial={{ 
-                            scale: 0,
-                            rotate: -180
-                          }}
-                          animate={{ 
-                            scale: 1,
-                            rotate: 0
-                          }}
-                          transition={{ 
-                            delay: 1.6 + index * 0.2 + techIndex * 0.1,
-                            type: "spring",
-                            stiffness: 200
-                          }}
-                          whileHover={{ 
-                            scale: 1.1,
-                            backgroundColor: "rgba(147, 51, 234, 0.3)"
-                          }}
-                          className="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 cursor-pointer"
+                    <div className="space-y-2">
+                      {internship.highlights.map((highlight, highlightIndex) => (
+                        <motion.div
+                          key={highlightIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 1.5 + index * 0.2 + highlightIndex * 0.1 }}
+                          className="flex items-start gap-2"
                         >
-                          {tech}
-                        </motion.span>
+                          <span className="text-purple-400 text-sm mt-1">•</span>
+                          <span className="text-gray-300 text-sm">{highlight}</span>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
-                  
-                  {/* Floating Particles */}
-                  <motion.div
-                    className="absolute top-4 right-4 w-2 h-2 bg-purple-400 rounded-full"
-                    animate={{
-                      y: [0, -10, 0],
-                      opacity: [0.3, 1, 0.3],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.4
-                    }}
-                  />
-                  <motion.div
-                    className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-pink-400 rounded-full"
-                    animate={{
-                      y: [0, 8, 0],
-                      opacity: [0.3, 1, 0.3],
-                      scale: [1, 1.3, 1]
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      delay: index * 0.6
-                    }}
-                  />
                 </motion.div>
               ))}
             </div>
