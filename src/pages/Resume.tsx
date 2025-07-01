@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Download, Mail, Phone, MapPin, Globe, Building2, GraduationCap } from "lucide-react";
 
@@ -19,13 +20,13 @@ const Resume = () => {
       position: "Software Development Intern | MERN Fullstack",
       duration: "May 2025 - June 2025",
       location: "Salem",
-      description: "Developed full-stack web applications using the MERN (MongoDB, Express.js, React, Node.js) technology stack, gaining comprehensive experience in modern web development practices.",
+      description: "🚀 Embarked on my first full-stack journey, diving into the exciting world of MERN development while learning the ropes of modern web technologies.",
       highlights: [
-        "Built responsive web applications using React.js with modern hooks and component architecture",
-        "Developed RESTful APIs using Node.js and Express.js for seamless data communication",
-        "Implemented database operations with MongoDB for efficient data storage and retrieval",
-        "Collaborated with development team using Agile methodologies and version control systems",
-        "Optimized application performance and implemented best practices for code quality"
+        "🎯 Built my first React components and learned about hooks",
+        "🔧 Created simple APIs with Node.js and Express",
+        "📊 Worked with MongoDB to store and fetch data",
+        "👥 Collaborated with team members on daily tasks",
+        "💡 Gained hands-on experience with full-stack concepts"
       ]
     },
     {
@@ -33,13 +34,13 @@ const Resume = () => {
       position: "Software Development Intern | Python",
       duration: "June 2023 - July 2023",
       location: "Fairlands, Salem",
-      description: "Gained foundational knowledge in Python programming and software development principles through hands-on coding experience and mentorship.",
+      description: "🐍 Started my coding adventure with Python, exploring the fundamentals and building a solid foundation in programming logic and problem-solving.",
       highlights: [
-        "Mastered Python fundamentals including data types, variables, loops, and conditional statements",
-        "Developed proficiency in writing, testing, and debugging Python applications",
-        "Learned object-oriented programming concepts including functions, modules, and data structures",
-        "Applied version control systems for collaborative development and code management",
-        "Enhanced problem-solving skills through practical coding challenges and projects"
+        "📚 Learned Python basics: variables, loops, and conditions",
+        "🔍 Practiced writing simple programs and fixing bugs",
+        "🧩 Explored functions, lists, and basic data structures",
+        "⚡ Used Git for the first time to track my code changes",
+        "🎓 Completed coding exercises and mini-projects"
       ]
     }
   ];
