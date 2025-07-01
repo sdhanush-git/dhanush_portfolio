@@ -15,17 +15,31 @@ const Resume = () => {
 
   const internships = [
     {
+      company: "ODUGAA TECH",
+      position: "Software Development Intern | MERN Fullstack",
+      duration: "May 2025 - June 2025",
+      location: "Salem",
+      description: "Developed full-stack web applications using the MERN (MongoDB, Express.js, React, Node.js) technology stack, gaining comprehensive experience in modern web development practices.",
+      highlights: [
+        "Built responsive web applications using React.js with modern hooks and component architecture",
+        "Developed RESTful APIs using Node.js and Express.js for seamless data communication",
+        "Implemented database operations with MongoDB for efficient data storage and retrieval",
+        "Collaborated with development team using Agile methodologies and version control systems",
+        "Optimized application performance and implemented best practices for code quality"
+      ]
+    },
+    {
       company: "TRIPLE TECH SOFT",
       position: "Software Development Intern | Python",
       duration: "June 2023 - July 2023",
       location: "Fairlands, Salem",
-      description: "Received an introduction to the fundamentals of Python programming and learned about data types, variables, loops, and conditional statements.",
+      description: "Gained foundational knowledge in Python programming and software development principles through hands-on coding experience and mentorship.",
       highlights: [
-        "Practiced writing and debugging Python code",
-        "Learned basic concepts such as functions, modules, and data structures",
-        "Gained solid foundation for further study and practical application of Python programming",
-        "Explored new techniques and learned from others, showcasing collaborative skills",
-        "Utilized version control system to manage codebase and track changes"
+        "Mastered Python fundamentals including data types, variables, loops, and conditional statements",
+        "Developed proficiency in writing, testing, and debugging Python applications",
+        "Learned object-oriented programming concepts including functions, modules, and data structures",
+        "Applied version control systems for collaborative development and code management",
+        "Enhanced problem-solving skills through practical coding challenges and projects"
       ]
     }
   ];
