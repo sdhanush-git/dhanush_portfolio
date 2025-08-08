@@ -1,59 +1,30 @@
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Github, Globe } from "lucide-react";
 
 const Projects = () => {
-  const [filter, setFilter] = useState("All");
-  
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      category: "Web",
-      description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
+      title: "Amazon Clone",
+      category: "UI Design",
+      description: "🎨 Crafted a visually stunning Amazon clone UI using Figma, closely mimicking the original platform's look and feel with modern design principles.",
       image: "/placeholder.svg",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      github: "https://github.com",
-      live: "https://example.com"
+      technologies: ["Figma", "UI/UX Design", "Prototyping", "Dark Mode"],
+      github: "#",
+      live: "#"
     },
     {
       id: 2,
-      title: "3D Portfolio Website",
-      category: "UI",
-      description: "Interactive 3D portfolio built with Three.js and Framer Motion",
+      title: "Web Based Stock Management System",
+      category: "Full Stack",
+      description: "💼 Developed a comprehensive inventory management system with real-time tracking, order management, and automated reporting capabilities.",
       image: "/placeholder.svg",
-      technologies: ["Three.js", "React", "Framer Motion"],
-      github: "https://github.com",
-      live: "https://example.com"
-    },
-    {
-      id: 3,
-      title: "Mobile Game",
-      category: "Game Dev",
-      description: "Physics-based mobile game with engaging gameplay mechanics",
-      image: "/placeholder.svg",
-      technologies: ["Unity", "C#", "Mobile"],
-      github: "https://github.com",
-      live: "https://example.com"
-    },
-    {
-      id: 4,
-      title: "AI Dashboard",
-      category: "Web",
-      description: "Real-time analytics dashboard with AI-powered insights",
-      image: "/placeholder.svg",
-      technologies: ["React", "Python", "TensorFlow", "D3.js"],
-      github: "https://github.com",
-      live: "https://example.com"
+      technologies: ["HTML", "CSS", "Bootstrap", "JavaScript", "Java", "MySQL"],
+      github: "#",
+      live: "#"
     }
   ];
-
-  const categories = ["All", "Web", "UI", "Game Dev"];
-
-  const filteredProjects = filter === "All" 
-    ? projects 
-    : projects.filter(project => project.category === filter);
 
   return (
     <motion.div
@@ -80,34 +51,12 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                filter === category
-                  ? "bg-gradient-to-r from-green-500 to-blue-500 text-white"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
-
         {/* Projects Grid */}
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               layout
