@@ -1,8 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Github, Globe } from "lucide-react";
+import { Github, Globe, Palette, Code, Layers } from "lucide-react";
+import { useState } from "react";
 
 const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState<'all' | 'ui' | 'web'>('all');
+
   const projects = [
     {
       id: 1,
@@ -24,6 +27,12 @@ const Projects = () => {
       github: "#",
       live: "#"
     }
+  ];
+
+  const filterButtons = [
+    { id: 'all', label: 'All Projects', icon: Layers, gradient: 'from-violet-500 to-purple-500', border: 'border-violet-500/30', text: 'text-violet-300' },
+    { id: 'ui', label: 'UI Design', icon: Palette, gradient: 'from-pink-500 to-purple-500', border: 'border-pink-500/30', text: 'text-pink-300' },
+    { id: 'web', label: 'Web Dev', icon: Code, gradient: 'from-green-500 to-blue-500', border: 'border-green-500/30', text: 'text-green-300' }
   ];
 
   return (
@@ -51,7 +60,63 @@ const Projects = () => {
           </p>
         </motion.div>
 
+        {/* Filter Buttons */}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex justify-center mb-16"
+        >
+          <div className="flex items-center gap-4 p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
+            {filterButtons.map((button) => {
+              const Icon = button.icon;
+              const isActive = activeFilter === button.id;
+              
+              return (
+                <motion.button
+                  key={button.id}
+                  onClick={() => setActiveFilter(button.id as any)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`
+                    relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2
+                    ${isActive 
+                      ? `bg-gradient-to-r ${button.gradient} text-white shadow-lg shadow-${button.gradient.split(' ')[1].replace('to-', '')}/30` 
+                      : `hover:bg-white/10 ${button.text} border border-transparent hover:${button.border}`
+                    }
+                  `}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeBackground"
+                      className="absolute inset-0 bg-gradient-to-r bg-opacity-20 rounded-xl"
+                      style={{
+                        background: `linear-gradient(135deg, ${button.gradient.includes('violet') ? '#8B5CF6, #A855F7' : 
+                          button.gradient.includes('pink') ? '#EC4899, #A855F7' : 
+                          '#10B981, #3B82F6'})`
+                      }}
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <div className="relative z-10 flex items-center gap-2">
+                    <Icon size={18} />
+                    {button.label}
+                  </div>
+                  {isActive && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full"
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
+        </motion.div>
+
         {/* UI Design Section */}
+        {(activeFilter === 'all' || activeFilter === 'ui') && (
         <motion.section
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -139,8 +204,10 @@ const Projects = () => {
             </div>
           </div>
         </motion.section>
+        )}
 
         {/* Web Development Section */}
+        {(activeFilter === 'all' || activeFilter === 'web') && (
         <motion.section
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -235,6 +302,7 @@ const Projects = () => {
             </div>
           </div>
         </motion.section>
+        )}
       </div>
     </motion.div>
   );
