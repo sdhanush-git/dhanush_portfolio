@@ -12,7 +12,7 @@ const Projects = () => {
       image: "/placeholder.svg",
       technologies: ["Figma", "UI/UX Design", "Prototyping", "Dark Mode"],
       github: "#",
-      live: "#"
+      live: "https://www.behance.net/gallery/192947159/Amazon-Clone-UI-Design"
     },
     {
       id: 2,
