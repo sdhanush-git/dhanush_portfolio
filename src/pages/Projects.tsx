@@ -9,7 +9,7 @@ const Projects = () => {
       title: "Amazon Clone",
       category: "UI Design",
       description: "🎨 Crafted a visually stunning Amazon clone UI using Figma, closely mimicking the original platform's look and feel with modern design principles.",
-      image: "/placeholder.svg",
+      image: "/lovable-uploads/946ba361-d35c-430e-9a65-ffaa199d1adb.png",
       technologies: ["Figma", "UI/UX Design", "Prototyping", "Dark Mode"],
       github: "#",
       live: "https://www.behance.net/gallery/192947159/Amazon-Clone-UI-Design"
